@@ -27,12 +27,12 @@ public class RegisterHelper {
 		return mbserver;
 	}
 
-	public static void register(ButlerAppMbean mbean) {
+	public static void register(ButlerAppMbean mbean, String mbeanName) {
 		MBeanServer server = getServer();
 
 		ObjectName name = null;
 		try {
-			name = new ObjectName("Application:Name=" + mbean.getMbeanName()
+			name = new ObjectName("Application:Name=" + mbeanName
 					+ ",Type=Server");
 			server.registerMBean(mbean, name);
 		} catch (Exception e) {
