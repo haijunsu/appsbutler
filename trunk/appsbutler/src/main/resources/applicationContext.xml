@@ -20,7 +20,7 @@
 	</bean>
 
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
-	<context:component-scan base-package="com.apps.butler" />
+	<context:component-scan base-package="org.apps.butler" />
 
 	<!-- 数据源配置,主要用于开发测试环境 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" destroy-method="close">
@@ -50,7 +50,7 @@
 				<prop key="hibernate.cache.provider_configuration_file_resource_path">/ehcache-hibernate.xml</prop>
 			</props>
 		</property>
-		<property name="packagesToScan" value="com.apps.butler.entity.*"/>
+		<property name="packagesToScan" value="org.apps.butler.entity.*"/>
 	</bean>
 
 	<!-- 事务配置 -->

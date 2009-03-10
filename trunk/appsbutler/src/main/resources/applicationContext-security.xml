@@ -25,5 +25,5 @@
 		<password-encoder hash="plaintext" />
 	</authentication-provider>
 
-	<beans:bean id="userDetailsService" class="com.apps.butler.service.security.UserDetailServiceImpl" />
+	<beans:bean id="userDetailsService" class="org.apps.butler.service.security.UserDetailServiceImpl" />
 </beans:beans>
