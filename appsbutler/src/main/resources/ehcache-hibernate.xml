@@ -10,8 +10,8 @@
 	<!-- Cluster peer host setting -->
 	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
 		properties="peerDiscovery=manual,
- 		rmiUrls=//localhost:40002/com.apps.butler.entity.user.User|//localhost:40002/com.apps.butler.entity.user.User.roles|
- 		        //localhost:40002/com.apps.butler.entity.user.Role|//localhost:40002/com.apps.butler.entity.user.Role.auths" />
+ 		rmiUrls=//localhost:40002/org.apps.butler.entity.user.User|//localhost:40002/org.apps.butler.entity.user.User.roles|
+ 		        //localhost:40002/org.apps.butler.entity.user.Role|//localhost:40002/org.apps.butler.entity.user.Role.auths" />
 
    <!-- Another server's cluster setting -->
    <!-- 
@@ -19,33 +19,33 @@
 		properties="hostName=localhost, port=40002,socketTimeoutMillis=2000" />
    	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
 		properties="peerDiscovery=manual,
- 		rmiUrls=//localhost:40001/com.apps.butler.entity.user.User|//localhost:40001/com.apps.butler.entity.user.User.roles|
- 		        //localhost:40001/com.apps.butler.entity.user.Role|//localhost:40001/com.apps.butler.entity.user.Role.auths"/>
+ 		rmiUrls=//localhost:40001/org.apps.butler.entity.user.User|//localhost:40001/org.apps.butler.entity.user.User.roles|
+ 		        //localhost:40001/org.apps.butler.entity.user.Role|//localhost:40001/org.apps.butler.entity.user.Role.auths"/>
     -->
 
 	<!-- Special objects setting. -->
-	<cache name="com.apps.butler.entity.user.User" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.apps.butler.entity.user.User" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false" />
 	</cache>
-	<cache name="com.apps.butler.entity.user.User.roles" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.apps.butler.entity.user.User.roles" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false" />
 	</cache>
-	<cache name="com.apps.butler.entity.user.Role" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.apps.butler.entity.user.Role" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false" />
 	</cache>
-	<cache name="com.apps.butler.entity.user.Role.auths" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.apps.butler.entity.user.Role.auths" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false" />
 	</cache>
 
-	<cache name="com.apps.butler.entity.user.Authority" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.apps.butler.entity.user.Authority" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true" />
 
 	<!--

@@ -22,7 +22,7 @@
 		</layout>
 	</appender>
 	
-	<logger name="com.apps.butler">
+	<logger name="org.apps.butler">
 		<level value="INFO" />
 	</logger>
 
