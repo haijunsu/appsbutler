@@ -1,7 +1,7 @@
 package org.apps.butler.mbean;
 
 
-public abstract class BaseBulterAppMbeanImpl implements ButlerAppMbean {
+public abstract class BaseBulterAppMbeanImpl implements ButlerAppMBean {
 
 	private long uptime = System.currentTimeMillis();
 
