@@ -11,10 +11,10 @@ import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RegisterHelper {
+public class RegisterMBeanHelper {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(RegisterHelper.class);
+			.getLogger(RegisterMBeanHelper.class);
 
 	private static MBeanServer mbserver = null;
 
