@@ -5,13 +5,13 @@
 	<groupId>appsbutler</groupId>
 	<artifactId>appsbutler-parent</artifactId>
 	<packaging>pom</packaging>
-	<name>Springside's Parent pom.xml</name>
+	<name>AppsButler's Parent pom.xml</name>
 	<version>1.0-SNAPSHOT</version>
 	<organization>
-		<name>SpringSide</name>
-		<url>http://www.springside.org.cn</url>
+		<name>AppsButler</name>
+		<url>http://code.google.com/p/appsbutler/</url>
 	</organization>
-	
+
 	<!-- 插件配置 -->
 	<build>
 		<!-- 命令行输入mvn时，默认执行mvn package  -->
@@ -123,11 +123,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<!-- springside modules begin -->
-			<dependency>
+			<!--dependency>
 				<groupId>org.springside</groupId>
 				<artifactId>springside3-core</artifactId>
 				<version>${springside.version}</version>
-			</dependency>
+			</dependency-->
 			<!-- springside modules end -->
 
 			<!-- spring begin -->

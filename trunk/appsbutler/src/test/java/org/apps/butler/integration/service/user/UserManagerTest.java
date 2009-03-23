@@ -3,16 +3,17 @@ package org.apps.butler.integration.service.user;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apps.butler.entity.user.Role;
 import org.apps.butler.entity.user.User;
+import org.apps.butler.integration.service.SpringTransactionalTestCase;
 import org.apps.butler.service.user.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.ExpectedException;
-import org.springside.modules.test.SpringTransactionalTestCase;
+
 
 /**
  * UserManager的集成测试用例.
- * 
+ *
  * 调用实际的DAO类进行操作,默认在操作后进行回滚.
- * 
+ *
  * @author calvin
  */
 public class UserManagerTest extends SpringTransactionalTestCase {

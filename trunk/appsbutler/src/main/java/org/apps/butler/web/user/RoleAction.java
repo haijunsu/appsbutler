@@ -9,13 +9,13 @@ import org.apache.struts2.dispatcher.ServletActionRedirectResult;
 import org.apps.butler.entity.user.Authority;
 import org.apps.butler.entity.user.Role;
 import org.apps.butler.service.user.UserManager;
+import org.apps.butler.util.CollectionUtils;
+import org.apps.butler.web.struts2.CRUDActionSupport;
 import org.springframework.beans.factory.annotation.Required;
-import org.springside.modules.utils.CollectionUtils;
-import org.springside.modules.web.struts2.CRUDActionSupport;
 
 /**
  * 角色管理Action.
- * 
+ *
  * @see CRUDActionSupport
  * @author calvin
  */
