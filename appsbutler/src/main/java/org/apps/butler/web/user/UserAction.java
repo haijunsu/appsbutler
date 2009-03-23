@@ -11,18 +11,19 @@ import org.apache.struts2.config.Results;
 import org.apache.struts2.dispatcher.ServletActionRedirectResult;
 import org.apps.butler.entity.user.Role;
 import org.apps.butler.entity.user.User;
+import org.apps.butler.hibernate.Page;
 import org.apps.butler.service.ServiceException;
 import org.apps.butler.service.user.UserManager;
+import org.apps.butler.util.CollectionUtils;
+import org.apps.butler.web.struts2.CRUDActionSupport;
 import org.springframework.beans.factory.annotation.Required;
-import org.springside.modules.orm.hibernate.Page;
-import org.springside.modules.utils.CollectionUtils;
-import org.springside.modules.web.struts2.CRUDActionSupport;
+
 
 /**
  * 用户管理Action.
- * 
+ *
  * @see CRUDActionSupport
- * 
+ *
  * @author calvin
  */
 @ParentPackage("default")

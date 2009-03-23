@@ -5,8 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
@@ -21,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sun.org.apache.xml.internal.security.utils.Base64;
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
 /**
  * This class provides APIs to encrypt and decrypt data with cryptographic
@@ -44,8 +44,6 @@ public class DesEncryptUtil {
 	private static final Logger logger = LoggerFactory
 			.getLogger(DesEncryptUtil.class);
 
-	private static final String ENCODING = "UTF-8";
-
 	private static final String SECURE_KEY_FILE_NAME = "secKey";
 
 	private DesEncryptUtil() {
@@ -56,46 +54,40 @@ public class DesEncryptUtil {
 	 * Encrypt an object to byte array with DES encryption and use base64 to
 	 * encode this byte array to String.
 	 *
-	 * @param key
-	 *            encryption key
 	 * @param object
 	 *            the object to be encrypted
 	 * @return encrypted string
 	 * @throws Exception
 	 */
-	public static String encrypt(String key, Object object) throws Exception {
+	public static String encrypt(Object object) throws Exception {
 		if (logger.isTraceEnabled()) {
-			logger.trace("key: " + key + " object: " + object);
+			logger.trace("object: " + object);
 		}
-		byte[] buf = encryptToByteArray(key, object);
+		byte[] buf = encryptToByteArray(object);
 		return Base64.encode(buf);
 	}
 
-	public static Object decrypt(String key, String encryptedStr)
-			throws Exception {
+	public static Object decrypt(String encryptedStr) throws Exception {
 		if (logger.isTraceEnabled()) {
-			logger.trace("key: " + key + " encryptedStr: " + encryptedStr);
+			logger.trace("encryptedStr: " + encryptedStr);
 		}
 
 		byte[] buf = null;
 		buf = Base64.decode(encryptedStr);
-		Object obj = decryptFromByteArray(key, buf);
+		Object obj = decryptFromByteArray(buf);
 		return obj;
 	}
 
 	/**
 	 * Encrypt an object to byte array with DES encryption
 	 *
-	 * @param key
-	 *            encryption key
 	 * @param obj
 	 *            the object to be encrypted
 	 * @return encrypted byte array
 	 * @throws Exception
 	 */
-	private static byte[] encryptToByteArray(String key, Object obj)
-			throws Exception {
-		Cipher cipher = getCipher(key, Cipher.ENCRYPT_MODE);
+	private static byte[] encryptToByteArray(Object obj) throws Exception {
+		Cipher cipher = getCipher(Cipher.ENCRYPT_MODE);
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		CipherOutputStream cos = new CipherOutputStream(bos, cipher);
 		ObjectOutputStream oos = new ObjectOutputStream(cos);
@@ -109,16 +101,13 @@ public class DesEncryptUtil {
 	/**
 	 * Decrypt the byte array to original object.
 	 *
-	 * @param key
-	 *            encryption key.
 	 * @param buf
 	 *            byte array.
 	 * @return The original object.
 	 * @throws Exception
 	 */
-	private static Object decryptFromByteArray(String key, byte[] buf)
-			throws Exception {
-		Cipher cipher = getCipher(key, Cipher.DECRYPT_MODE);
+	private static Object decryptFromByteArray(byte[] buf) throws Exception {
+		Cipher cipher = getCipher(Cipher.DECRYPT_MODE);
 		ByteArrayInputStream bis = new ByteArrayInputStream(buf);
 		CipherInputStream cis = new CipherInputStream(bis, cipher);
 		ObjectInputStream ois = new ObjectInputStream(cis);
@@ -130,15 +119,13 @@ public class DesEncryptUtil {
 	/**
 	 * Get the cipher with specified key and mode.
 	 *
-	 * @param key
-	 *            The encryption key.
 	 * @param mode
 	 *            Cipher.ENCRYPT_MODE or Cipher.DECRYPT_MODE
 	 * @return The cipher object.
 	 * @throws Exception
 	 */
-	private static Cipher getCipher(String key, int mode) throws Exception {
-		byte keyArr[] = key.getBytes(ENCODING);
+	private static Cipher getCipher(int mode) throws Exception {
+		byte keyArr[] = getSecureKey();
 		DESKeySpec desKeySpec = new DESKeySpec(keyArr);
 		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
 		SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
@@ -147,7 +134,7 @@ public class DesEncryptUtil {
 		return cipher;
 	}
 
-	public static byte[] getDefaultKey() throws Exception {
+	public static byte[] getSecureKey() throws Exception {
 		File secKeyFile = new File(SECURE_KEY_FILE_NAME);
 		if (!secKeyFile.exists()) {
 			SecureRandom secRandom = new SecureRandom();
@@ -155,9 +142,32 @@ public class DesEncryptUtil {
 			keyGen.init(secRandom);
 			SecretKey secKey = keyGen.generateKey();
 			byte[] secKeyArray = secKey.getEncoded();
-			FileUtil.writeToFile(SECURE_KEY_FILE_NAME,
-					new ByteArrayInputStream(secKeyArray), true);
+			FileUtil.writeFile(secKeyFile, secKeyArray);
 		}
-		
+		return FileUtil.readFile(secKeyFile);
+	}
+
+	public static void main(String[] args) {
+
+		try {
+			Map<String, String> map = new HashMap<String, String>();
+
+			map.put("key1", "value1");
+			map.put("key2", "value2");
+
+			System.out.println(map);
+			FileUtil.writeFile("testFile", encrypt(map));
+			System.out
+					.println(decrypt(new String(FileUtil.readFile("testFile"))));
+			String testvalue = "sfadsfasdfas";
+			System.out.println(testvalue);
+			FileUtil.writeFile("testFile2", encrypt(testvalue));
+			System.out.println(decrypt(new String(FileUtil
+					.readFile("testFile2"))));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

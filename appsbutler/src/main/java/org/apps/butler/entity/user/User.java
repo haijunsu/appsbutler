@@ -15,15 +15,15 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apps.butler.entity.IdEntity;
+import org.apps.butler.util.CollectionUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springside.modules.utils.CollectionUtils;
 
 /**
  * 用户.
- * 
+ *
  * 注意@Cache(Entity与集合的缓存),@ManyToMany/@JoinTable(多对多关系),@OrderBy/LinkedHashSet(集合排序),@Transient(非持久化属性)的应用.
- * 
+ *
  * @author calvin
  */
 @Entity

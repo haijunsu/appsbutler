@@ -5,21 +5,21 @@ import java.util.List;
 import org.apps.butler.entity.user.Authority;
 import org.apps.butler.entity.user.Role;
 import org.apps.butler.entity.user.User;
+import org.apps.butler.hibernate.Page;
+import org.apps.butler.hibernate.SimpleHibernateTemplate;
 import org.apps.butler.service.ServiceException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springside.modules.orm.hibernate.Page;
-import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
 /**
  * 整个User模块内的业务逻辑Facade类.
  * 组合user,role两者的DAO.DAO均直接使用泛型的SimpleHibernateTemplate.
  * 使用Spring的@Service/@Autowired 指定IOC设置.
  * 使用Spring的@Transactional指定事务管理.
- * 
+ *
  * @author calvin
  */
 @Service
@@ -74,9 +74,9 @@ public class UserManager {
 	}
 
 	/**
-	 * 验证用户名密码. 
+	 * 验证用户名密码.
 	 * 因为使用acegi做安全管理,此函数已作废,仅用作demo.
-	 * 
+	 *
 	 * @return 验证通过时返回true.用户名或密码错误返回false.
 	 */
 	@Transactional(readOnly = true)

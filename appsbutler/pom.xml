@@ -17,10 +17,10 @@
 	</build>
 	<dependencies>
 		<!-- springside -->
-		<dependency>
-			<groupId>org.springside</groupId>
-			<artifactId>springside3-core</artifactId>
-		</dependency>
+		<!--
+			dependency> <groupId>org.springside</groupId>
+			<artifactId>springside3-core</artifactId> </dependency
+		-->
 
 		<!-- spring begin -->
 		<dependency>
@@ -81,7 +81,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-codebehind-plugin</artifactId>
+			<artifactId>struts2-codebehind-plugin
+			</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -107,12 +108,21 @@
 
 		<!-- spring security -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core-tiger</artifactId>
+			<groupId>org.springframework.security
+			</groupId>
+			<artifactId>spring-security-core-tiger
+			</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
+			<groupId>org.springframework.security
+			</groupId>
+			<artifactId>spring-security-taglibs
+			</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<!-- logging begin -->
@@ -124,6 +134,12 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
