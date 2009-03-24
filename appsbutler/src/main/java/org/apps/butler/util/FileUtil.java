@@ -492,7 +492,7 @@ public class FileUtil {
 			throws IOException {
 		BufferedInputStream bIn = new BufferedInputStream(from);
 		BufferedOutputStream bOut = new BufferedOutputStream(to);
-		byte[] bContent = new byte[4096];
+		byte[] bContent = new byte[8192];
 		int len = 0;
 		while ((len = bIn.read(bContent)) > 0) {
 			bOut.write(bContent, 0, len);
