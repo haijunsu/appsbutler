@@ -21,7 +21,8 @@ import org.apps.butler.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  * This class provides APIs to encrypt and decrypt data with cryptographic
@@ -44,6 +45,7 @@ public class DesEncryptUtil {
 	private static final Logger logger = LoggerFactory
 			.getLogger(DesEncryptUtil.class);
 
+	private static final String SECURE_FOLDRE = ".";
 	private static final String SECURE_KEY_FILE_NAME = "secKey";
 
 	private DesEncryptUtil() {
@@ -64,7 +66,8 @@ public class DesEncryptUtil {
 			logger.trace("object: " + object);
 		}
 		byte[] buf = encryptToByteArray(object);
-		return Base64.encode(buf);
+		BASE64Encoder encoder = new BASE64Encoder();
+		return encoder.encodeBuffer(buf);
 	}
 
 	public static Object decrypt(String encryptedStr) throws Exception {
@@ -73,7 +76,8 @@ public class DesEncryptUtil {
 		}
 
 		byte[] buf = null;
-		buf = Base64.decode(encryptedStr);
+		BASE64Decoder decoder = new BASE64Decoder();
+		buf = decoder.decodeBuffer(encryptedStr);
 		Object obj = decryptFromByteArray(buf);
 		return obj;
 	}
@@ -135,7 +139,7 @@ public class DesEncryptUtil {
 	}
 
 	public static byte[] getSecureKey() throws Exception {
-		File secKeyFile = new File(SECURE_KEY_FILE_NAME);
+		File secKeyFile = getSecureFileName(SECURE_KEY_FILE_NAME);
 		if (!secKeyFile.exists()) {
 			SecureRandom secRandom = new SecureRandom();
 			KeyGenerator keyGen = KeyGenerator.getInstance("DES");
@@ -145,6 +149,21 @@ public class DesEncryptUtil {
 			FileUtil.writeFile(secKeyFile, secKeyArray);
 		}
 		return FileUtil.readFile(secKeyFile);
+	}
+
+	private static File getSecureFileName(String fileName) {
+		File secFile = new File(SECURE_FOLDRE + File.separator + fileName);
+		return secFile;
+	}
+
+	public static void encryptUserPassword(String userName, String password)
+			throws Exception {
+		FileUtil.writeFile(getSecureFileName(userName), encrypt(password));
+	}
+
+	public static String decryptUserPassword(String userName) throws Exception {
+		return (String) decrypt(new String(FileUtil
+				.readFile(getSecureFileName(userName))));
 	}
 
 	public static void main(String[] args) {
@@ -159,13 +178,11 @@ public class DesEncryptUtil {
 			FileUtil.writeFile("testFile", encrypt(map));
 			System.out
 					.println(decrypt(new String(FileUtil.readFile("testFile"))));
-			String testvalue = "sfadsfasdfas";
-			System.out.println(testvalue);
-			FileUtil.writeFile("testFile2", encrypt(testvalue));
-			System.out.println(decrypt(new String(FileUtil
-					.readFile("testFile2"))));
+			String password = "haijun pass";
+			System.out.println(password);
+			encryptUserPassword("haijun", password);
+			System.out.println(decryptUserPassword("haijun"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
