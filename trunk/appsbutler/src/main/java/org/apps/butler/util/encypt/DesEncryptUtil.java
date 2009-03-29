@@ -244,9 +244,27 @@ public class DesEncryptUtil {
 	 *            The file to store encrypted password.
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	public static void encryptUserPassword(String userName, String password,
 			File passwordFile) throws Exception {
+		encryptUserPassword(userName, password, passwordFile, null);
+	}
+
+	/**
+	 * Encrypt user password and store in password file.
+	 *
+	 * @param userName
+	 *            The user name which need to encrypt password
+	 * @param password
+	 *            The password to be encrypted
+	 * @param passwordFile
+	 *            The file to store encrypted password.
+	 * @param secKeyFile
+	 *            The secure key file
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public static void encryptUserPassword(String userName, String password,
+			File passwordFile, File secKeyFile) throws Exception {
 		File encryptFile = passwordFile == null ? getDefaultFile(SECURE_PASSWORD_FILE_NAME)
 				: passwordFile;
 		Map<String, String> map = null;
@@ -258,7 +276,7 @@ public class DesEncryptUtil {
 			map = new HashMap<String, String>();
 		}
 		map.put(userName, password);
-		FileUtil.writeFile(encryptFile, encrypt(map));
+		FileUtil.writeFile(encryptFile, encrypt(map, secKeyFile));
 	}
 
 	/**
@@ -283,13 +301,30 @@ public class DesEncryptUtil {
 	 * @return The descrypted password of the user
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	public static String decryptUserPassword(String userName, File passwordFile)
 			throws Exception {
+		return decryptUserPassword(userName, passwordFile, null);
+	}
+
+	/**
+	 * Decrypt user password from password file
+	 *
+	 * @param userName
+	 *            The user name which need to decrypt password
+	 * @param passwordFile
+	 *            The file to store encrypted password.
+	 * @param secKeyFile
+	 *            The secure key file
+	 * @return The descrypted password of the user
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public static String decryptUserPassword(String userName,
+			File passwordFile, File secKeyFile) throws Exception {
 		File encryptFile = passwordFile == null ? getDefaultFile(SECURE_PASSWORD_FILE_NAME)
 				: passwordFile;
 		Map<String, String> map = (Map<String, String>) decrypt(new String(
-				FileUtil.readFile(encryptFile)));
+				FileUtil.readFile(encryptFile)), secKeyFile);
 		String password = null;
 		if (map == null || (password = map.get(userName)) == null) {
 			throw new Exception("Can't find user: " + userName);
@@ -300,25 +335,16 @@ public class DesEncryptUtil {
 	public static void main(String[] args) {
 
 		try {
-			Map<String, String> map = new HashMap<String, String>();
-
-			map.put("key1", "value1");
-			map.put("key2", "value2");
-
-			System.out.println(map);
-			FileUtil.writeFile("testFile", encrypt(map));
-			System.out
-					.println(decrypt(new String(FileUtil.readFile("testFile"))));
 			String password = "haijun pass3";
-			System.out.println(password);
+			System.out.println("haijun:" + password);
 			encryptUserPassword("haijun", password);
 			System.out.println(decryptUserPassword("haijun"));
 			password = "haijun pass2";
-			System.out.println(password);
+			System.out.println("test1:" + password);
 			encryptUserPassword("test1", password);
 			System.out.println(decryptUserPassword("test1"));
 			password = "haijun pass1";
-			System.out.println(password);
+			System.out.println("haijun1:" + password);
 			encryptUserPassword("haijun1", password);
 			System.out.println(decryptUserPassword("haijun1"));
 			System.out.println(decryptUserPassword("haijun3"));
