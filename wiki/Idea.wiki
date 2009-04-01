@@ -12,7 +12,7 @@
   * 利用Hibernate配置文件，提供更多的codegen的功能，简化开发
   * sitemash装饰页面
   * 使用taglib（eXtremeTable）来显示页面表格 http://sourceforge.net/projects/extremecomp/
-  * DWR和jQuery实现ajax功能 http://www.ibm.com/developerworks/cn/xml/x-ajaxjquery.html
+  * DWR和jQuery实现ajax功能 http://jquery-api-zh-cn.googlecode.com/svn/trunk/xml/jqueryapi.xml
   * Xfile实现web service功能
   * ActiveMQ实现services的订阅功能
   * 使用encache做为缓存框架
