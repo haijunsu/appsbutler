@@ -1,6 +1,6 @@
 @echo off
-echo [INFO] Ê¹ÓÃmaven¸ù¾İpom.xml ¸´ÖÆÒÀÀµjarµ½ÏàÓ¦Ä¿Â¼¡£
-echo [INFO] compile,runtime¼¶±ğµ½/webapp/WEB-INF/lib, test,provided¼¶±ğµ½/lib
+echo [INFO] ä½¿ç”¨mavenæ ¹æ®pom.xml å¤åˆ¶ä¾èµ–jaråˆ°ç›¸åº”ç›®å½•ã€‚
+echo [INFO] compile,runtimeçº§åˆ«åˆ°/webapp/WEB-INF/lib, test,providedçº§åˆ«åˆ°/lib
 
 set local_driver=%cd:~0,2%
 set local_path=%cd%
