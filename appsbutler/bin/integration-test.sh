@@ -1,6 +1,6 @@
 #!/bin/sh
-echo "[INFO] Ê¹ÓÃMavenÔËĞĞµ¥Ôª²âÊÔ¼°¼¯³É²âÊÔÓÃÀı."
-echo "[INFO] ÇëÈ·±£DerbyÊı¾İ¿âÆô¶¯."
+echo "[INFO] ä½¿ç”¨Mavenè¿è¡Œå•å…ƒæµ‹è¯•åŠé›†æˆæµ‹è¯•ç”¨ä¾‹."
+echo "[INFO] è¯·ç¡®ä¿Derbyæ•°æ®åº“å¯åŠ¨."
 
 cd ..
 mvn integration-test

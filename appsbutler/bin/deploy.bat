@@ -1,7 +1,7 @@
 @echo off
-echo [INFO] Ê¹ÓÃmaven±àÒëÏîÄ¿£¬²¢ÒÔÄ¿Â¼ĞÎÊ½²¿Êğµ½tomcatÖĞ.
-echo [INFO] ÇëÈ·±£Tomcat 6ÒÑÆô¶¯²¢ÒÑÔÚconf/tomcat-users.xmlÖĞÉèÖÃadminÓÃ»§.
-echo [INFO] Ïê¼û http://wiki.springside.org.cn/display/calvin/maven
+echo [INFO] ä½¿ç”¨mavenç¼–è¯‘é¡¹ç›®ï¼Œå¹¶ä»¥ç›®å½•å½¢å¼éƒ¨ç½²åˆ°tomcatä¸­.
+echo [INFO] è¯·ç¡®ä¿Tomcat 6å·²å¯åŠ¨å¹¶å·²åœ¨conf/tomcat-users.xmlä¸­è®¾ç½®adminç”¨æˆ·.
+echo [INFO] è¯¦è§ http://wiki.springside.org.cn/display/calvin/maven
 
 cd ..
 call mvn tomcat:undeploy

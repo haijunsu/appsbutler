@@ -1,6 +1,6 @@
 @echo off
-echo [INFO] Ê¹ÓÃMavenÔËÐÐµ¥Ôª²âÊÔ¼°¼¯³É²âÊÔÓÃÀý.
-echo [INFO] ÇëÈ·±£DerbyÊý¾Ý¿âÆô¶¯.
+echo [INFO] ä½¿ç”¨Mavenè¿è¡Œå•å…ƒæµ‹è¯•åŠé›†æˆæµ‹è¯•ç”¨ä¾‹.
+echo [INFO] è¯·ç¡®ä¿Derbyæ•°æ®åº“å¯åŠ¨.
 
 cd ..
 call mvn integration-test
