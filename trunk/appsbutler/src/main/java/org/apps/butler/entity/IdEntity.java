@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * 统一定义id的entity基类.
- * 
+ *
  * @author calvin
  */
 @MappedSuperclass
